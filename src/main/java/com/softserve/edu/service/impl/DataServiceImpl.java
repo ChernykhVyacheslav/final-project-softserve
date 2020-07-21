@@ -6,7 +6,10 @@ import com.softserve.edu.entity.Communication;
 import com.softserve.edu.entity.Entity;
 import com.softserve.edu.entity.Solution;
 import com.softserve.edu.service.DataService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DataServiceImpl implements DataService {
     private List<Entity> students;
     private List<Entity> mentors;
