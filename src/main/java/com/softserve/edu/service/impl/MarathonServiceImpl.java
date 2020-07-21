@@ -1,6 +1,7 @@
 package com.softserve.edu.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,15 @@ public class MarathonServiceImpl implements MarathonService {
     }
 
     public List<String> getStudents() {
-        // TODO
-        return null;
+        return dataService.getStudents().stream()
+                    .map(item -> item.getName())
+                    .collect(Collectors.toList());
     }
 
     public List<String> getMentors() {
-        // TODO
-        return null;
+        return dataService.getMentors().stream()
+                .map(item -> item.getName())
+                .collect(Collectors.toList());
     }
 
     public StudentScore studentResult(String studentName) {
