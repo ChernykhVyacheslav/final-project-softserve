@@ -41,15 +41,14 @@ public class DataServiceImpl implements DataService {
     }
 
     public void addCommunication(String studentName, String mentorName) {
-        int studentId = getEntityId(students, studentName);
-        int mentorId = getEntityId(mentors, mentorName);
-        communication.add(new Communication(studentId, mentorId));
+        communication.add(new Communication(getStudentId(studentName),
+                                            getMentorId(mentorName)));
     }
 
     public void addSolution(String studentName, String sprintName, int score) {
-        int studentId = getEntityId(students, studentName);
-        int sprintId = getEntityId(sprints, sprintName);
-        solution.add(new Solution(studentId, sprintId, score));
+        solution.add(new Solution(  getStudentId(studentName),
+                                    getSprintId(sprintName),
+                                    score));
     }
 
     private Entity getEntityByName(List<Entity> entityList, String name) {
@@ -87,6 +86,18 @@ public class DataServiceImpl implements DataService {
 
     public List<Solution> getSolution() {
         return solution;
+    }
+
+    public int getStudentId(String studentName){
+        return getEntityId(students, studentName);
+    }
+
+    public int getMentorId(String mentorName){
+        return getEntityId(mentors, mentorName);
+    }
+
+    public int getSprintId(String sprintName){
+        return getEntityId(sprints, sprintName);
     }
 
 }
