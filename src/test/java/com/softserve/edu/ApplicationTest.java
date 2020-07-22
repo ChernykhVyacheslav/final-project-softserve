@@ -199,7 +199,7 @@ public class ApplicationTest {
     public void checkStudentAverage() {
         String studentName = "Student1";
         int[] score = {80, 75, 90, 100, 60};
-        double average = (double)Arrays.stream(score).sum()/ score.length;
+        double average = (double)Arrays.stream(score).sum() / score.length;
         AverageScore expected = new AverageScore(studentName, average);
 
         AverageScore actual =  marathonService.studentAverage(studentName);
@@ -208,12 +208,10 @@ public class ApplicationTest {
 
     @Test
     public void checkAllStudentsAverage() {
-        String studentName = "Student1";
         int[] score1 = {80, 75, 90, 100, 60};
         int[] score2 = {60, 75, 85, 80, 70};
-
-        double average1 = (double)Arrays.stream(score1).sum()/ score1.length;
-        double average2 = (double)Arrays.stream(score2).sum()/ score2.length;
+        double average1 = (double)Arrays.stream(score1).sum() / score1.length;
+        double average2 = (double)Arrays.stream(score2).sum() / score2.length;
         List<AverageScore> expected = new ArrayList<>();
         expected.add(new AverageScore("Student1", average1));
         expected.add(new AverageScore("Student2", average2));
