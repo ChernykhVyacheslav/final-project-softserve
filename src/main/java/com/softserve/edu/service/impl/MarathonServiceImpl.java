@@ -1,18 +1,16 @@
 package com.softserve.edu.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.softserve.edu.dto.SprintScore;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.softserve.edu.dto.AverageScore;
 import com.softserve.edu.dto.MentorStudent;
+import com.softserve.edu.dto.SprintScore;
 import com.softserve.edu.dto.StudentScore;
 import com.softserve.edu.service.DataService;
 import com.softserve.edu.service.MarathonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MarathonServiceImpl implements MarathonService {
@@ -43,7 +41,7 @@ public class MarathonServiceImpl implements MarathonService {
                 .filter(item -> item.getIdStudent()==studentId)
                 .forEach(item -> {
                     studentScore.addSprintScore(
-                        new SprintScore(dataService.getSprintById(item.getIdSprint()),
+                        new SprintScore(dataService.getSprintNameById(item.getIdSprint()),
                                         item.getScore()));
                 });
         return studentScore;
@@ -56,17 +54,28 @@ public class MarathonServiceImpl implements MarathonService {
     }
 
     public AverageScore studentAverage(String studentName) {
-        // TODO
-        return null;
+        StudentScore studentScore = studentResult(studentName);
+        double avg = studentScore.getSprintScore().stream()
+                .map(SprintScore::getScore)
+                .collect(Collectors.summarizingInt(Integer::intValue)).getAverage();
+        return new AverageScore(studentName, avg);
     }
 
     public List<AverageScore> allStudentsAverage() {
-        // TODO
-        return null;
+        return dataService.getStudents().stream()
+                .map(st -> studentAverage(st.getName()))
+                .collect(Collectors.toList());
     }
 
     public MentorStudent mentorStudents(String mentorName) {
-        // TODO
-        return null;
+        int mentorId = dataService.getMentorId(mentorName);
+        MentorStudent result = new MentorStudent(mentorName);
+        dataService.getCommunications().stream()
+                .filter(item -> item.getIdMentor() == mentorId)
+                .forEach(item -> {
+                    result.addStudentName(
+                            dataService.getStudentNameById(item.getIdStudent()));
+                });
+        return result;
     }
 }

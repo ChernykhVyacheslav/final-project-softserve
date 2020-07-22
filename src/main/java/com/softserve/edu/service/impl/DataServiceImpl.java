@@ -101,11 +101,27 @@ public class DataServiceImpl implements DataService {
         return getEntityId(sprints, sprintName);
     }
 
-    public String getSprintById(int sprintId){
+    public String getStudentNameById(int studentId){
+        Entity student = students.stream()
+                .filter(item -> item.getId() == studentId)
+                .findAny()
+                .orElse(null);
+        return Objects.isNull(student) ? null : student.getName();
+    }
+
+    public String getMentorNameById(int mentorId){
+        Entity mentor = mentors.stream()
+                .filter(item -> item.getId() == mentorId)
+                .findAny()
+                .orElse(null);
+        return Objects.isNull(mentor) ? null : mentor.getName();
+    }
+
+    public String getSprintNameById(int sprintId){
         Entity sprint = sprints.stream()
                 .filter(item -> item.getId() == sprintId)
                 .findAny()
                 .orElse(null);
-        return Objects.isNull(sprint)? null : sprint.getName();
+        return Objects.isNull(sprint) ? null : sprint.getName();
     }
 }
