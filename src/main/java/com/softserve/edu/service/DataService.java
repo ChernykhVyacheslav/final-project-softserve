@@ -39,4 +39,6 @@ public interface DataService {
     public int getMentorId(String mentorName);
 
     public int getSprintId(String sprintName);
+
+    public void clean();
 }

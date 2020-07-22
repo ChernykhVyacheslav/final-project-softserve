@@ -8,7 +8,6 @@ import com.softserve.edu.entity.Entity;
 import com.softserve.edu.entity.Solution;
 import com.softserve.edu.service.DataService;
 import com.softserve.edu.service.MarathonService;
-import com.softserve.edu.service.impl.DataServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +24,7 @@ public class ApplicationTest {
     
     @Autowired
     private MarathonService marathonService;
-    
+
     @Autowired
     private DataService dataService;
 
@@ -33,13 +32,14 @@ public class ApplicationTest {
     private MarathonController controller;
 
     @Autowired
-    public ApplicationTest(MarathonService marathonService) {
+    public ApplicationTest(MarathonService marathonService, DataService dataService) {
         this.marathonService = marathonService;
+        this.dataService = dataService;
         fillDataService();
     }
-    
+
     private void fillDataService() {
-        dataService = new DataServiceImpl();
+        dataService.clean();
 
         dataService.addMentor("Mentor1");
         dataService.addMentor("Mentor2");
