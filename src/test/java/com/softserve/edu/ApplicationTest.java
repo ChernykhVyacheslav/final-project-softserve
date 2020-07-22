@@ -16,9 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @ExtendWith(SpringExtension.class)
@@ -198,14 +197,35 @@ public class ApplicationTest {
     @Test
     public void checkStudentAverage() {
         String studentName = "Student1";
-        int[] score1 = {80, 75, 90, 100, 60};
-        double average = Arrays.stream(score1).average().getAsDouble();
+        int[] score = {80, 75, 90, 100, 60};
+        double average = (double)Arrays.stream(score).sum()/ score.length;
         AverageScore expected = new AverageScore(studentName, average);
 
         AverageScore actual =  marathonService.studentAverage(studentName);
         Assertions.assertEquals(expected, actual, "checkStudentAverage()");
     }
-        @Test
+
+    @Test
+    public void checkAllStudentsAverage() {
+        String studentName = "Student1";
+        int[] score1 = {80, 75, 90, 100, 60};
+        int[] score2 = {60, 75, 85, 80, 70};
+
+        double average1 = (double)Arrays.stream(score1).sum()/ score1.length;
+        double average2 = (double)Arrays.stream(score2).sum()/ score2.length;
+        List<AverageScore> expected = new ArrayList<>();
+        expected.add(new AverageScore("Student1", average1));
+        expected.add(new AverageScore("Student2", average2));
+        expected.add(new AverageScore("Student3", 0));
+        expected.add(new AverageScore("Student4", 0));
+        expected.add(new AverageScore("Student5", 0));
+
+        List<AverageScore> actual =  marathonService.allStudentsAverage();
+        Assertions.assertEquals(expected, actual, "checkStudentAverage()");
+    }
+
+
+    @Test
     public void contextLoads() {
         Assertions.assertNotNull(controller);
     }
