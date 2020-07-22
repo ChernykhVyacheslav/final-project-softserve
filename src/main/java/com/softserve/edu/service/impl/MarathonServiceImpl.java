@@ -1,5 +1,6 @@
 package com.softserve.edu.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,8 +50,9 @@ public class MarathonServiceImpl implements MarathonService {
     }
 
     public List<StudentScore> allStudentsResult() {
-        // TODO
-        return null;
+        return dataService.getStudents().stream()
+                .map(st -> studentResult(st.getName()))
+                .collect(Collectors.toList());
     }
 
     public AverageScore studentAverage(String studentName) {
