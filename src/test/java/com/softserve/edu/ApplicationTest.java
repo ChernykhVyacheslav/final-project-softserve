@@ -99,7 +99,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void checkGetCommunication() {
+    public void checkGetCommunications() {
         List<Communication> expected = new ArrayList<Communication>() {{
             add(new Communication(dataService.getMentorId("Mentor1"), dataService.getStudentId("Student1")));
             add(new Communication(dataService.getMentorId("Mentor1"), dataService.getStudentId("Student3")));
@@ -110,12 +110,12 @@ public class ApplicationTest {
             add(new Communication(dataService.getMentorId("Mentor2"), dataService.getStudentId("Student2")));
             add(new Communication(dataService.getMentorId("Mentor2"), dataService.getStudentId("Student4")));
         }};
-        List<Communication> actual = dataService.getCommunication();
-        Assertions.assertEquals(expected, actual, "checkGetCommunication()");
+        List<Communication> actual = dataService.getCommunications();
+        Assertions.assertEquals(expected, actual, "checkGetCommunications()");
     }
 
     @Test
-    public void checkGetSolution() {
+    public void checkGetSolutions() {
         List<Solution> expected = new ArrayList<Solution>() {{
             add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint1"), 80));
             add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint2"), 75));
@@ -129,8 +129,8 @@ public class ApplicationTest {
             add(new Solution(dataService.getStudentId("Student2"), dataService.getSprintId("Sprint4"), 80));
             add(new Solution(dataService.getStudentId("Student2"), dataService.getSprintId("Sprint5"), 70));
         }};
-        List<Solution> actual = dataService.getSolution();
-        Assertions.assertEquals(expected, actual, "checkGetSolution()");
+        List<Solution> actual = dataService.getSolutions();
+        Assertions.assertEquals(expected, actual, "checkGetSolutions()");
     }
 
     @Test

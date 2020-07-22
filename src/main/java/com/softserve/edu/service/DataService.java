@@ -35,8 +35,4 @@ public interface DataService {
     public int getMentorId(String mentorName);
 
     public int getSprintId(String sprintName);
-
-    public List<Communication> getCommunication();
-
-    public List<Solution> getSolution();
 }
