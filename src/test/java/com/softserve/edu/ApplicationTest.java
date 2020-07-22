@@ -56,14 +56,14 @@ public class ApplicationTest {
         dataService.addSprint("Sprint4");
         dataService.addSprint("Sprint5");
 
-        dataService.addCommunication("Mentor1", "Student1");
-        dataService.addCommunication("Mentor1", "Student3");
-        dataService.addCommunication("Mentor1", "Student4");
-        dataService.addCommunication("Mentor1", "Student5");
+        dataService.addCommunication("Student1", "Mentor1");
+        dataService.addCommunication("Student3", "Mentor1");
+        dataService.addCommunication("Student4", "Mentor1");
+        dataService.addCommunication("Student5", "Mentor1");
 
-        dataService.addCommunication("Mentor2", "Student1");
-        dataService.addCommunication("Mentor2", "Student2");
-        dataService.addCommunication("Mentor2", "Student4");
+        dataService.addCommunication("Student1", "Mentor2");
+        dataService.addCommunication("Student2", "Mentor2");
+        dataService.addCommunication("Student4", "Mentor2");
 
         dataService.addSolution("Student1", "Sprint1", 80);
         dataService.addSolution("Student1", "Sprint2", 75);
