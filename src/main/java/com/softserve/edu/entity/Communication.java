@@ -24,4 +24,22 @@ public class Communication {
     public void setIdMentor(int idMentor) {
         this.idMentor = idMentor;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Communication)) return false;
+
+        Communication that = (Communication) o;
+
+        if (getIdStudent() != that.getIdStudent()) return false;
+        return getIdMentor() == that.getIdMentor();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getIdStudent();
+        result = 31 * result + getIdMentor();
+        return result;
+    }
 }

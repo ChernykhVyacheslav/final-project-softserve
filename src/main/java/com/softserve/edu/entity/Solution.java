@@ -26,4 +26,24 @@ public class Solution {
     public void setScore(int score) {
         this.score = score;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Solution)) return false;
+
+        Solution solution = (Solution) o;
+
+        if (getIdStudent() != solution.getIdStudent()) return false;
+        if (getIdSprint() != solution.getIdSprint()) return false;
+        return getScore() == solution.getScore();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getIdStudent();
+        result = 31 * result + getIdSprint();
+        result = 31 * result + getScore();
+        return result;
+    }
 }

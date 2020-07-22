@@ -21,4 +21,22 @@ public class Entity {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Entity)) return false;
+
+        Entity entity = (Entity) o;
+
+        if (getId() != entity.getId()) return false;
+        return getName().equals(entity.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + getName().hashCode();
+        return result;
+    }
 }
