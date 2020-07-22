@@ -19,4 +19,10 @@ public interface DataService {
     public List<Entity> getStudents();
 
     public List<Entity> getMentors();
+
+    public int getStudentId(String studentName);
+
+    public int getMentorId(String mentorName);
+
+    public int getSprintId(String sprintName);
 }
