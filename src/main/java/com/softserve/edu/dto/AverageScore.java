@@ -36,4 +36,12 @@ public class AverageScore {
     public int hashCode() {
         return Objects.hash(studentName, avgScore);
     }
+
+    @Override
+    public String toString() {
+        return "AverageScore{" +
+                "studentName='" + studentName + '\'' +
+                ", avgScore=" + avgScore +
+                '}';
+    }
 }

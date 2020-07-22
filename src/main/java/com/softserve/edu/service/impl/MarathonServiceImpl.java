@@ -57,8 +57,8 @@ public class MarathonServiceImpl implements MarathonService {
     public AverageScore studentAverage(String studentName) {
         StudentScore studentScore = studentResult(studentName);
         double avg = studentScore.getSprintScore().stream()
-                .map(SprintScore::getScore)
-                .collect(Collectors.summarizingInt(Integer::intValue)).getAverage();
+                        .mapToDouble(SprintScore::getScore)
+                        .average().getAsDouble();
         return new AverageScore(studentName, avg);
     }
 
