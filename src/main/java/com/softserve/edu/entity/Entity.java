@@ -29,7 +29,6 @@ public class Entity {
 
         Entity entity = (Entity) o;
 
-        if (getId() != entity.getId()) return false;
         return getName().equals(entity.getName());
     }
 

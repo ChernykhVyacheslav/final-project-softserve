@@ -22,11 +22,7 @@ public class DataServiceImpl implements DataService {
 
     @Autowired
     public DataServiceImpl() {
-        this.students = new ArrayList<>();
-        this.mentors = new ArrayList<>();
-        this.sprints = new ArrayList<>();
-        this.communication = new ArrayList<>();
-        this.solution = new ArrayList<>();
+        clean();
     }
 
     public void addStudent(String studentName) {
@@ -101,27 +97,31 @@ public class DataServiceImpl implements DataService {
         return getEntityId(sprints, sprintName);
     }
 
-    public String getStudentNameById(int studentId){
-        Entity student = students.stream()
-                .filter(item -> item.getId() == studentId)
+    private String getEntityNameById(List<Entity> entityList, int id) {
+        Entity entity = entityList.stream()
+                .filter(item -> item.getId() == id)
                 .findAny()
                 .orElse(null);
-        return Objects.isNull(student) ? null : student.getName();
+        return Objects.isNull(entity) ? null : entity.getName();
+    }
+
+    public String getStudentNameById(int studentId){
+        return getEntityNameById(students, studentId);
     }
 
     public String getMentorNameById(int mentorId){
-        Entity mentor = mentors.stream()
-                .filter(item -> item.getId() == mentorId)
-                .findAny()
-                .orElse(null);
-        return Objects.isNull(mentor) ? null : mentor.getName();
+        return getEntityNameById(mentors, mentorId);
     }
 
     public String getSprintNameById(int sprintId){
-        Entity sprint = sprints.stream()
-                .filter(item -> item.getId() == sprintId)
-                .findAny()
-                .orElse(null);
-        return Objects.isNull(sprint) ? null : sprint.getName();
+        return getEntityNameById(sprints, sprintId);
+    }
+
+    public void clean() {
+        this.students = new ArrayList<>();
+        this.mentors = new ArrayList<>();
+        this.sprints = new ArrayList<>();
+        this.communication = new ArrayList<>();
+        this.solution = new ArrayList<>();
     }
 }

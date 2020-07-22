@@ -8,7 +8,6 @@ import com.softserve.edu.entity.Entity;
 import com.softserve.edu.entity.Solution;
 import com.softserve.edu.service.DataService;
 import com.softserve.edu.service.MarathonService;
-import com.softserve.edu.service.impl.DataServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +24,7 @@ public class ApplicationTest {
     
     @Autowired
     private MarathonService marathonService;
-    
+
     @Autowired
     private DataService dataService;
 
@@ -33,13 +32,14 @@ public class ApplicationTest {
     private MarathonController controller;
 
     @Autowired
-    public ApplicationTest(MarathonService marathonService) {
+    public ApplicationTest(MarathonService marathonService, DataService dataService) {
         this.marathonService = marathonService;
+        this.dataService = dataService;
         fillDataService();
     }
-    
+
     private void fillDataService() {
-        dataService = new DataServiceImpl();
+        dataService.clean();
 
         dataService.addMentor("Mentor1");
         dataService.addMentor("Mentor2");
@@ -56,14 +56,14 @@ public class ApplicationTest {
         dataService.addSprint("Sprint4");
         dataService.addSprint("Sprint5");
 
-        dataService.addCommunication("Mentor1", "Student1");
-        dataService.addCommunication("Mentor1", "Student3");
-        dataService.addCommunication("Mentor1", "Student4");
-        dataService.addCommunication("Mentor1", "Student5");
+        dataService.addCommunication("Student1", "Mentor1");
+        dataService.addCommunication("Student3", "Mentor1");
+        dataService.addCommunication("Student4", "Mentor1");
+        dataService.addCommunication("Student5", "Mentor1");
 
-        dataService.addCommunication("Mentor2", "Student1");
-        dataService.addCommunication("Mentor2", "Student2");
-        dataService.addCommunication("Mentor2", "Student4");
+        dataService.addCommunication("Student1", "Mentor2");
+        dataService.addCommunication("Student2", "Mentor2");
+        dataService.addCommunication("Student4", "Mentor2");
 
         dataService.addSolution("Student1", "Sprint1", 80);
         dataService.addSolution("Student1", "Sprint2", 75);
