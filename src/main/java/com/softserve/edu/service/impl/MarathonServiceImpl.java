@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,15 +57,16 @@ public class MarathonServiceImpl implements MarathonService {
 
     public AverageScore studentAverage(String studentName) {
         StudentScore studentScore = studentResult(studentName);
-        double avg = studentScore.getSprintScore().stream()
-                        .mapToDouble(SprintScore::getScore)
-                        .average().getAsDouble();
+        OptionalDouble optionalAvg = studentScore.getSprintScore().stream()
+            .mapToDouble(SprintScore::getScore)
+            .average();
+        double avg = optionalAvg.isPresent() ? optionalAvg.getAsDouble() : 0;
         return new AverageScore(studentName, avg);
     }
 
     public List<AverageScore> allStudentsAverage() {
-        return dataService.getStudents().stream()
-                .map(st -> studentAverage(st.getName()))
+        return getStudents().stream()
+                .map(this::studentAverage)
                 .collect(Collectors.toList());
     }
 
