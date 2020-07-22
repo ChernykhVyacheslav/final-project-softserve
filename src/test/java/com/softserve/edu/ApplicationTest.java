@@ -2,6 +2,7 @@ package com.softserve.edu;
 
 import com.softserve.edu.controller.MarathonController;
 import com.softserve.edu.dto.AverageScore;
+import com.softserve.edu.dto.MentorStudent;
 import com.softserve.edu.dto.SprintScore;
 import com.softserve.edu.dto.StudentScore;
 import com.softserve.edu.entity.Communication;
@@ -221,9 +222,21 @@ public class ApplicationTest {
         expected.add(new AverageScore("Student5", 0));
 
         List<AverageScore> actual =  marathonService.allStudentsAverage();
-        Assertions.assertEquals(expected, actual, "checkStudentAverage()");
+        Assertions.assertEquals(expected, actual, "checkAllStudentsAverage()");
     }
 
+    @Test
+    public void checkMentorStudents(){
+        String mentorName = "Mentor1";
+        MentorStudent expected = new MentorStudent(mentorName);
+        expected.addStudentName("Student1");
+        expected.addStudentName("Student3");
+        expected.addStudentName("Student4");
+        expected.addStudentName("Student5");
+
+        MentorStudent actual = marathonService.mentorStudents(mentorName);
+        Assertions.assertEquals(expected, actual, "checkMentorStudents()");
+    }
 
     @Test
     public void contextLoads() {

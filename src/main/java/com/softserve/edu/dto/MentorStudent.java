@@ -38,4 +38,12 @@ public class MentorStudent {
     public int hashCode() {
         return Objects.hash(mentortName, studentNames);
     }
+
+    @Override
+    public String toString() {
+        return "MentorStudent{" +
+                "mentortName='" + mentortName + '\'' +
+                ", studentNames=" + studentNames +
+                '}';
+    }
 }
