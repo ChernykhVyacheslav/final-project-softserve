@@ -1,6 +1,8 @@
 package com.softserve.edu.service;
 
+import com.softserve.edu.entity.Communication;
 import com.softserve.edu.entity.Entity;
+import com.softserve.edu.entity.Solution;
 
 import java.util.List;
 
@@ -25,4 +27,8 @@ public interface DataService {
     public int getMentorId(String mentorName);
 
     public int getSprintId(String sprintName);
+
+    public List<Communication> getCommunication();
+
+    public List<Solution> getSolution();
 }
