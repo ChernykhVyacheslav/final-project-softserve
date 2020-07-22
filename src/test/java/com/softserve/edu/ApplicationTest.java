@@ -1,7 +1,10 @@
 package com.softserve.edu;
 
 import com.softserve.edu.controller.MarathonController;
+import com.softserve.edu.dto.SprintScore;
+import com.softserve.edu.dto.StudentScore;
 import com.softserve.edu.entity.Communication;
+import com.softserve.edu.entity.Entity;
 import com.softserve.edu.entity.Solution;
 import com.softserve.edu.service.DataService;
 import com.softserve.edu.service.MarathonService;
@@ -99,6 +102,19 @@ public class ApplicationTest {
     }
 
     @Test
+    public void checkGetSprints() {
+        List<Entity> expected = new ArrayList<Entity>() {{
+            add(new Entity("Sprint1"));
+            add(new Entity("Sprint2"));
+            add(new Entity("Sprint3"));
+            add(new Entity("Sprint4"));
+            add(new Entity("Sprint5"));
+        }};
+        List<Entity> actual = dataService.getSprints();
+        Assertions.assertEquals(expected, actual, "checkGetSprints()");
+    }
+
+    @Test
     public void checkGetCommunications() {
         List<Communication> expected = new ArrayList<Communication>() {{
             add(new Communication(dataService.getMentorId("Mentor1"), dataService.getStudentId("Student1")));
@@ -131,6 +147,46 @@ public class ApplicationTest {
         }};
         List<Solution> actual = dataService.getSolutions();
         Assertions.assertEquals(expected, actual, "checkGetSolutions()");
+    }
+
+    @Test
+    public void checkStudentResult() {
+        String studentName = "Student1";
+
+        StudentScore expected = new StudentScore(studentName);
+        expected.addSprintScore(new SprintScore("Sprint1", 80));
+        expected.addSprintScore(new SprintScore("Sprint2", 75));
+        expected.addSprintScore(new SprintScore("Sprint3", 90));
+        expected.addSprintScore(new SprintScore("Sprint4", 100));
+        expected.addSprintScore(new SprintScore("Sprint5", 60));
+        
+        StudentScore actual = marathonService.studentResult(studentName);
+        Assertions.assertEquals(expected, actual, "checkStudentResult()");
+    }
+
+    @Test
+    public void checkAllStudentsResult() {
+        List<StudentScore> expected = new ArrayList<>();
+        
+        StudentScore studentScore1 = new StudentScore("Student1");
+        studentScore1.addSprintScore(new SprintScore("Sprint1", 80));
+        studentScore1.addSprintScore(new SprintScore("Sprint2", 75));
+        studentScore1.addSprintScore(new SprintScore("Sprint3", 90));
+        studentScore1.addSprintScore(new SprintScore("Sprint4", 100));
+        studentScore1.addSprintScore(new SprintScore("Sprint5", 60));
+
+        StudentScore studentScore2 = new StudentScore("Student2");
+        studentScore2.addSprintScore(new SprintScore("Sprint1", 60));
+        studentScore2.addSprintScore(new SprintScore("Sprint2", 75));
+        studentScore2.addSprintScore(new SprintScore("Sprint3", 85));
+        studentScore2.addSprintScore(new SprintScore("Sprint4", 80));
+        studentScore2.addSprintScore(new SprintScore("Sprint5", 70));
+
+        expected.add(studentScore1);
+        expected.add(studentScore2);
+        
+        List<StudentScore> actual = marathonService.allStudentsResult();
+        Assertions.assertEquals(expected, actual, "checkAllStudentsResult()");
     }
 
     @Test

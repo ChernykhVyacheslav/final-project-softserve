@@ -9,7 +9,7 @@ public class StudentScore {
 
     public StudentScore(String studentName) {
         this.studentName = studentName;
-        this.sprintScore = new ArrayList<SprintScore>();
+        this.sprintScore = new ArrayList<>();
     }
 
     public String getStudentName() {
