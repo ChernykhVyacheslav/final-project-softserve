@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class DataServiceImpl implements DataService {
@@ -80,11 +81,11 @@ public class DataServiceImpl implements DataService {
         return sprints;
     }
 
-    public List<Communication> getCommunication() {
+    public List<Communication> getCommunications() {
         return communication;
     }
 
-    public List<Solution> getSolution() {
+    public List<Solution> getSolutions() {
         return solution;
     }
 
@@ -100,4 +101,11 @@ public class DataServiceImpl implements DataService {
         return getEntityId(sprints, sprintName);
     }
 
+    public String getSprintById(int sprintId){
+        Entity sprint = sprints.stream()
+                .filter(item -> item.getId() == sprintId)
+                .findAny()
+                .orElse(null);
+        return Objects.isNull(sprint)? null : sprint.getName();
+    }
 }

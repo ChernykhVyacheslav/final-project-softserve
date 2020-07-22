@@ -3,6 +3,7 @@ package com.softserve.edu.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.softserve.edu.dto.SprintScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +36,16 @@ public class MarathonServiceImpl implements MarathonService {
     }
 
     public StudentScore studentResult(String studentName) {
-        // TODO
-        return null;
+        int studentId = dataService.getStudentId(studentName);
+        StudentScore studentScore = new StudentScore(studentName);
+        dataService.getSolutions().stream()
+                .filter(item -> item.getIdStudent()==studentId)
+                .forEach(item -> {
+                    studentScore.addSprintScore(
+                        new SprintScore(dataService.getSprintById(item.getIdSprint()),
+                                        item.getScore()));
+                });
+        return studentScore;
     }
 
     public List<StudentScore> allStudentsResult() {
