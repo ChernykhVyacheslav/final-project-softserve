@@ -28,7 +28,11 @@ public interface DataService {
 
     public List<Entity> getSprints();
 
-    public String getSprintById(int sprintId);
+    public String getStudentNameById(int studentId);
+
+    public String getMentorNameById(int mentorId);
+
+    public String getSprintNameById(int sprintId);
 
     public int getStudentId(String studentName);
 
