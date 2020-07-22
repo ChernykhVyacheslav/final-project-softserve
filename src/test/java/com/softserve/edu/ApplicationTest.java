@@ -117,14 +117,14 @@ public class ApplicationTest {
     @Test
     public void checkGetCommunications() {
         List<Communication> expected = new ArrayList<Communication>() {{
-            add(new Communication(dataService.getMentorId("Mentor1"), dataService.getStudentId("Student1")));
-            add(new Communication(dataService.getMentorId("Mentor1"), dataService.getStudentId("Student3")));
-            add(new Communication(dataService.getMentorId("Mentor1"), dataService.getStudentId("Student4")));
-            add(new Communication(dataService.getMentorId("Mentor1"), dataService.getStudentId("Student5")));
+            add(new Communication(dataService.getStudentId("Student1"), dataService.getMentorId("Mentor1")));
+            add(new Communication(dataService.getStudentId("Student3"), dataService.getMentorId("Mentor1")));
+            add(new Communication(dataService.getStudentId("Student4"), dataService.getMentorId("Mentor1")));
+            add(new Communication(dataService.getStudentId("Student5"), dataService.getMentorId("Mentor1")));
 
-            add(new Communication(dataService.getMentorId("Mentor2"), dataService.getStudentId("Student1")));
-            add(new Communication(dataService.getMentorId("Mentor2"), dataService.getStudentId("Student2")));
-            add(new Communication(dataService.getMentorId("Mentor2"), dataService.getStudentId("Student4")));
+            add(new Communication(dataService.getStudentId("Student1"), dataService.getMentorId("Mentor2")));
+            add(new Communication(dataService.getStudentId("Student2"), dataService.getMentorId("Mentor2")));
+            add(new Communication(dataService.getStudentId("Student4"), dataService.getMentorId("Mentor2")));
         }};
         List<Communication> actual = dataService.getCommunications();
         Assertions.assertEquals(expected, actual, "checkGetCommunications()");
@@ -135,9 +135,9 @@ public class ApplicationTest {
         List<Solution> expected = new ArrayList<Solution>() {{
             add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint1"), 80));
             add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint2"), 75));
-            add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint1"), 90));
-            add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint1"), 100));
-            add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint1"), 60));
+            add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint3"), 90));
+            add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint4"), 100));
+            add(new Solution(dataService.getStudentId("Student1"), dataService.getSprintId("Sprint5"), 60));
 
             add(new Solution(dataService.getStudentId("Student2"), dataService.getSprintId("Sprint1"), 60));
             add(new Solution(dataService.getStudentId("Student2"), dataService.getSprintId("Sprint2"), 75));
@@ -184,6 +184,9 @@ public class ApplicationTest {
 
         expected.add(studentScore1);
         expected.add(studentScore2);
+        expected.add(new StudentScore("Student3"));
+        expected.add(new StudentScore("Student4"));
+        expected.add(new StudentScore("Student5"));
         
         List<StudentScore> actual = marathonService.allStudentsResult();
         Assertions.assertEquals(expected, actual, "checkAllStudentsResult()");
